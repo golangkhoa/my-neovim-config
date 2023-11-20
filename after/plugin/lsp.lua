@@ -63,23 +63,15 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	-- ["clangd"] = function()
-	-- 	require("neodev").setup()
-	-- 	require("lspconfig").clangd.setup({
-	-- 		capabilities = capabilities,
-	-- 		on_attach = on_attach,
-	-- 		cmd = { "clangd" },
-	-- 		filetypes = { "c", "cpp", "objc", "objcpp", "cuda", "proto" },
-	-- 		single_file_support = true,
-	-- 		root_dir = require("lspconfig").util.root_pattern(
-	-- 			".clangd",
-	-- 			".clang-tidy",
-	-- 			".clang-format",
-	-- 			"compile_commands.json",
-	-- 			"compile_flags.txt",
-	-- 			"configure.ac",
-	-- 			".git"
-	-- 		),
-	-- 	})
-	-- end,
+	["dockerls"] = function()
+		require("neodev").setup()
+		require("lspconfig").gopls.setup({
+			on_attach = on_attach,
+			capabilities = capabilities,
+			cmd = { "docker-langserver", "--stdio" },
+			filetypes = { "dockerfile" },
+			root_dir = util.root_pattern("Dockerfile"),
+			single_file_support = true,
+		})
+	end,
 })
