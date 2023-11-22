@@ -51,15 +51,15 @@ require("mason-lspconfig").setup_handlers({
 			filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			single_file_support = true,
-			settings = {
-				gopls = {
-					completeUnimported = true,
-					usePlaceholders = true,
-					analyses = {
-						unusedparams = true,
-					},
-				},
-			},
+			-- settings = {
+			-- 	gopls = {
+			-- 		completeUnimported = true,
+			-- 		usePlaceholders = true,
+			-- 		analyses = {
+			-- 			unusedparams = true,
+			-- 		},
+			-- 	},
+			-- },
 		})
 	end,
 
@@ -74,4 +74,22 @@ require("mason-lspconfig").setup_handlers({
 			single_file_support = true,
 		})
 	end,
+})
+
+require("lspconfig").gopls.setup({
+	on_attach = on_attach,
+	capabilities = capabilities,
+	cmd = { "gopls" },
+	filetypes = { "go", "gomod", "gowork", "gotmpl" },
+	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+	single_file_support = true,
+	settings = {
+		gopls = {
+			completeUnimported = true,
+			usePlaceholders = true,
+			analyses = {
+				unusedparams = true,
+			},
+		},
+	},
 })
