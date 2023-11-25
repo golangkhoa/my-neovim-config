@@ -24,13 +24,14 @@ end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
-local util = require("lspconfig").util
+local lspconfig = require("lspconfig")
+local util = require("lspconfig.util")
 
 require("mason").setup()
 require("mason-lspconfig").setup_handlers({
 	["lua_ls"] = function()
 		require("neodev").setup()
-		require("lspconfig").lua_ls.setup({
+		lspconfig.lua_ls.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			settings = {
@@ -43,29 +44,27 @@ require("mason-lspconfig").setup_handlers({
 	end,
 
 	["gopls"] = function()
-		require("neodev").setup()
-		require("lspconfig").gopls.setup({
+		lspconfig.gopls.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			cmd = { "gopls" },
 			filetypes = { "go", "gomod", "gowork", "gotmpl" },
 			root_dir = util.root_pattern("go.work", "go.mod", ".git"),
 			single_file_support = true,
-			-- settings = {
-			-- 	gopls = {
-			-- 		completeUnimported = true,
-			-- 		usePlaceholders = true,
-			-- 		analyses = {
-			-- 			unusedparams = true,
-			-- 		},
-			-- 	},
-			-- },
+			settings = {
+				gopls = {
+					completeUnimported = true,
+					usePlaceholders = true,
+					analyses = {
+						unusedparams = true,
+					},
+				},
+			},
 		})
 	end,
 
 	["dockerls"] = function()
-		require("neodev").setup()
-		require("lspconfig").gopls.setup({
+		lspconfig.dockerls.setup({
 			on_attach = on_attach,
 			capabilities = capabilities,
 			cmd = { "docker-langserver", "--stdio" },
@@ -74,22 +73,11 @@ require("mason-lspconfig").setup_handlers({
 			single_file_support = true,
 		})
 	end,
-})
 
-require("lspconfig").gopls.setup({
-	on_attach = on_attach,
-	capabilities = capabilities,
-	cmd = { "gopls" },
-	filetypes = { "go", "gomod", "gowork", "gotmpl" },
-	root_dir = util.root_pattern("go.work", "go.mod", ".git"),
-	single_file_support = true,
-	settings = {
-		gopls = {
-			completeUnimported = true,
-			usePlaceholders = true,
-			analyses = {
-				unusedparams = true,
-			},
-		},
-	},
+	["elixirls"] = function()
+		lspconfig.elixirls.setup({
+			cmd = { "/home/dang-khoa/Downloads/elixir-ls/language_server.sh" },
+			filetypes = { "elixir", "eelixir", "heex", "surface" },
+		})
+	end,
 })
