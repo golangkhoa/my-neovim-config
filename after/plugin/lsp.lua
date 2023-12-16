@@ -75,68 +75,6 @@ require("mason-lspconfig").setup_handlers({
 		})
 	end,
 
-	["elixirls"] = function()
-		lspconfig.elixirls.setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-			cmd = { "/home/dang-khoa/Downloads/elixir-ls/language_server.sh" },
-			filetypes = { "elixir", "eelixir", "heex", "surface" },
-			single_file_support = true,
-		})
-	end,
-
-	["intelephense"] = function()
-		lspconfig.intelephense.setup({
-			on_attach = on_attach,
-			capabilities = capabilities,
-			cmd = { "intelephense", "--stdio" },
-			filetypes = { "php" },
-			single_file_support = true,
-		})
-	end,
-
-	["tsserver"] = function()
-		lspconfig.tsserver.setup({
-			cmd = { "typescript-language-server", "--stdio" },
-			filetypes = {
-				"javascript",
-				"typescript",
-			},
-			root_dir = util.root_pattern("tsconfig.json", "package.json", "jsconfig.json", ".git"),
-			single_file_support = true,
-			init_options = {
-				preferences = {
-					disableSuggestions = true,
-				},
-			},
-		})
-	end,
-
-	["svelte"] = function()
-		lspconfig.svelte.setup({
-			cmd = { "svelteserver", "--stdio" },
-			filetypes = { "svelte" },
-			root_dir = util.root_pattern("package.json", ".git"),
-		})
-	end,
-
-	["html"] = function()
-		lspconfig.html.setup({
-			capabilities = capabilities,
-			cmd = { "vscode-html-language-server", "--stdio" },
-			filetypes = { "html", "svelte" },
-			init_options = {
-				configurationSection = { "html", "css", "javascript" },
-				embeddedLanguages = {
-					css = true,
-					javascript = true,
-				},
-				provideFormatter = true,
-			},
-			single_file_support = true,
-		})
-	end,
-
 	["rust_analyzer"] = function()
 		lspconfig.rust_analyzer.setup({
 			on_attach = on_attach,

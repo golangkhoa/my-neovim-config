@@ -50,15 +50,15 @@ return {
 			"MunifTanjim/nui.nvim",
 		},
 	},
-	{
-		"jackMort/ChatGPT.nvim",
-		event = "VeryLazy",
-		dependencies = {
-			"MunifTanjim/nui.nvim",
-			"nvim-lua/plenary.nvim",
-			"nvim-telescope/telescope.nvim",
-		},
-	},
+	-- {
+	-- 	"jackMort/ChatGPT.nvim",
+	-- 	event = "VeryLazy",
+	-- 	dependencies = {
+	-- 		"MunifTanjim/nui.nvim",
+	-- 		"nvim-lua/plenary.nvim",
+	-- 		"nvim-telescope/telescope.nvim",
+	-- 	},
+	-- },
 	--[[ "mg979/vim-visual-multi", ]]
 	{
 		"olexsmir/gopher.nvim",
@@ -89,6 +89,13 @@ return {
 			local crates = require("crates")
 			crates.setup(opts)
 			crates.show()
+		end,
+	},
+	{
+		"rust-lang/rust.vim",
+		ft = "rust",
+		init = function()
+			vim.g.rustfmt_autosave = 1
 		end,
 	},
 }
